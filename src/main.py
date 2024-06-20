@@ -3,11 +3,15 @@ from PIL import ImageTk, Image
 
 root = Tk()
 root.title("Image Viewer")
-root.iconbitmap('C:/Users/User/Documents/programa acao/ImageViewer/images/icon.ico')
+root.iconbitmap('C:/Users/User/Documents/programa acao/ImageViewer/src/icon.ico')
 
+folder = "./images"
 img_list = []
 
-image = Label(image=img_list)
+for image in folder:
+    img_list.append(ImageTk.Photoimage(Image.open(image)))
+
+image = Label(image=img_list[0])
 back = Button(text="<")
 leave = Button(text="Close", command=exit)
 front = Button(text=">")
