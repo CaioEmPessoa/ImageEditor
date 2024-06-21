@@ -3,14 +3,16 @@ from PIL import ImageTk, Image
 import os
 
 root = Tk()
-root.title("Image Viewer")
-root.iconbitmap('C:/Users/User/Documents/programa acao/ImageViewer/src/icon.ico')
-i = 0
+root.title("Image Editor")
 
 location = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 folder = f"{location}\\images\\"
+icon = f"{location}\\src\\icon.ico"
+root.iconbitmap(icon)
+
 img_list = [folder + img for img in os.listdir(folder)]
 leng = len(img_list) - 1
+i = 0
 
 status = Label(root, text=f"image {i + 1} of {leng + 1}")
 
@@ -40,7 +42,7 @@ def frontF():
     back.grid(row=1, column=0)
     leave.grid(row=1, column=1)
     front.grid(row=1, column=2)
-    status.grid(row=2, column=2)
+    status.grid(row=2, column=2, sticky=E)
 
 
 def backF():
@@ -68,7 +70,7 @@ def backF():
     back.grid(row=1, column=0)
     leave.grid(row=1, column=1)
     front.grid(row=1, column=2)
-    status.grid(row=2, column=2)
+    status.grid(row=2, column=2, sticky=E)
     
 open_img = ImageTk.PhotoImage(Image.open(img_list[i]))
 
@@ -86,7 +88,7 @@ else:
 image.grid(row=0, column=0, columnspan= 3)
 back.grid(row=1, column=0)
 leave.grid(row=1, column=1)
-front.grid(row=1, column=2)
-status.grid(row=2, column=2)
+front.grid(row=1, column=2, pady=3)
+status.grid(row=2, column=2, sticky=E)
 
 root.mainloop()
