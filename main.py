@@ -11,6 +11,9 @@ location = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__))
 folder = f"{location}\\images\\"
 img_list = [folder + img for img in os.listdir(folder)]
 leng = len(img_list) - 1
+
+status = Label(root, text=f"image {i + 1} of {leng + 1}")
+
 def frontF():
     global image
     global back
@@ -19,6 +22,7 @@ def frontF():
     global img_list
     global open_img
     global leng
+    global status
 
     i += 1
     image.grid_forget()
@@ -26,6 +30,7 @@ def frontF():
     image = Label(image=open_img)
     back = Button(text="<", command=backF)
     leave = Button(text="Close", command=exit)
+    status = Label(root, text=f"image {i + 1} of {leng + 1}")
     if i == leng:
         front = Button(root, text=">", state=DISABLED)
     else:
@@ -35,6 +40,7 @@ def frontF():
     back.grid(row=1, column=0)
     leave.grid(row=1, column=1)
     front.grid(row=1, column=2)
+    status.grid(row=2, column=2)
 
 
 def backF():
@@ -44,6 +50,7 @@ def backF():
     global i
     global img_list
     global open_img
+    global status
 
     i -= 1
     image.grid_forget()
@@ -51,6 +58,7 @@ def backF():
     image = Label(image=open_img)
     leave = Button(text="Close", command=exit)
     front = Button(text=">", command=frontF)
+    status = Label(root, text=f"image {i + 1} of {leng + 1}")
     if i == 0:
         back = Button(root, text="<", state=DISABLED)
     else:
@@ -60,6 +68,7 @@ def backF():
     back.grid(row=1, column=0)
     leave.grid(row=1, column=1)
     front.grid(row=1, column=2)
+    status.grid(row=2, column=2)
     
 open_img = ImageTk.PhotoImage(Image.open(img_list[i]))
 
@@ -78,5 +87,6 @@ image.grid(row=0, column=0, columnspan= 3)
 back.grid(row=1, column=0)
 leave.grid(row=1, column=1)
 front.grid(row=1, column=2)
+status.grid(row=2, column=2)
 
 root.mainloop()
