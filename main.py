@@ -1,9 +1,13 @@
 from tkinter import *
 from PIL import ImageTk, Image
+import customtkinter as ctk
 import os
 
 root = Tk()
 root.title("Image Editor")
+root.geometry('1920x1080')
+
+
 
 location = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 folder = f"{location}\\images\\"
@@ -13,6 +17,8 @@ root.iconbitmap(icon)
 img_list = [folder + img for img in os.listdir(folder)]
 leng = len(img_list) - 1
 i = 0
+
+
 
 status = Label(root, text=f"image {i + 1} of {leng + 1}")
 
@@ -27,7 +33,8 @@ def screen():
     global status
 
     image.grid_forget()
-    open_img = ImageTk.PhotoImage(Image.open(img_list[i]))
+    image_original = Image.open(img_list[i])
+    open_img = ImageTk.PhotoImage(image_original)
     image = Label(image=open_img)
     leave = Button(text="Close", command=exit)
     status = Label(root, text=f"image {i + 1} of {leng + 1}")
@@ -40,10 +47,11 @@ def screen():
     else:
         front = Button(text=">", command=frontF)
 
+    ImageFrame.grid(row=1, column=1)
     image.grid(row=0, column=0, columnspan= 3)
     back.grid(row=1, column=0)
     leave.grid(row=1, column=1)
-    front.grid(row=1, column=2)
+    front.grid(row=1, column=2, pady=3)
     status.grid(row=2, column=2, sticky=E)
 
 
@@ -57,11 +65,12 @@ def backF():
     i -= 1
     screen()
     
-open_img = ImageTk.PhotoImage(Image.open(img_list[i]))
+image_original = Image.open(img_list[i])
+open_img = ImageTk.PhotoImage(image_original)
 
-image = Label(image=open_img)
-holder1 = Label(root, padx=1920, pady=2)
-holder2 = Label(root, pady=1080, padx=2)
+ImageFrame = Canvas(root)
+
+image = Label(ImageFrame, image=open_img)
 leave = Button(text="Close", command=exit)
 if i == leng:
     front = Button(root, text=">", state=DISABLED)
@@ -72,12 +81,11 @@ if i == 0:
 else:
     back = Button(text="<", command=backF)
 
-holder1.grid(row=0, column=0)
-holder2.grid(row=0, column=3)
-image.grid(row=1, column=1, columnspan= 3)
-back.grid(row=2, column=0)
-leave.grid(row=2, column=1)
-front.grid(row=2, column=2, pady=3)
-status.grid(row=3, column=2, sticky=E)
+ImageFrame.grid(row=1, column=1)
+image.grid(row=0, column=0, columnspan= 3)
+back.grid(row=1, column=0)
+leave.grid(row=1, column=1)
+front.grid(row=1, column=2, pady=3)
+status.grid(row=2, column=2, sticky=E)
 
 root.mainloop()
