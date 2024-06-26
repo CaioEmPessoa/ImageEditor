@@ -7,7 +7,8 @@ root = Tk()
 root.title("Image Editor")
 root.geometry('1920x1080')
 
-
+root.columnconfigure((0,1,2,3), weight = 1, uniform = 'a')
+root.rowconfigure(0, weight = 1)
 
 location = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 folder = f"{location}\\images\\"
@@ -68,21 +69,22 @@ def backF():
 image_original = Image.open(img_list[i])
 open_img = ImageTk.PhotoImage(image_original)
 
-ImageFrame = Canvas(root)
+ImageFrame = Canvas(root, background= 'black', bd = 0)
+ButtonFrame = Frame(root)
 
 image = Label(ImageFrame, image=open_img)
+image.pack()
 leave = Button(text="Close", command=exit)
 if i == leng:
-    front = Button(root, text=">", state=DISABLED)
+    front = Button(ButtonFrame, text=">", state=DISABLED)
 else:
     front = Button(text=">", command=frontF)
 if i == 0:
-    back = Button(root, text="<", state=DISABLED)
+    back = Button(ButtonFrame, text="<", state=DISABLED)
 else:
     back = Button(text="<", command=backF)
 
-ImageFrame.grid(row=1, column=1)
-image.grid(row=0, column=0, columnspan= 3)
+ImageFrame.grid(row=0, column=1, columnspan=3, stick=NSEW)
 back.grid(row=1, column=0)
 leave.grid(row=1, column=1)
 front.grid(row=1, column=2, pady=3)
