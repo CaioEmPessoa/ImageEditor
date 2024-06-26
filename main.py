@@ -60,6 +60,8 @@ def backF():
 open_img = ImageTk.PhotoImage(Image.open(img_list[i]))
 
 image = Label(image=open_img)
+holder1 = Label(root, padx=1920, pady=2)
+holder2 = Label(root, pady=1080, padx=2)
 leave = Button(text="Close", command=exit)
 if i == leng:
     front = Button(root, text=">", state=DISABLED)
@@ -70,10 +72,12 @@ if i == 0:
 else:
     back = Button(text="<", command=backF)
 
-image.grid(row=0, column=0, columnspan= 3)
-back.grid(row=1, column=0)
-leave.grid(row=1, column=1)
-front.grid(row=1, column=2, pady=3)
-status.grid(row=2, column=2, sticky=E)
+holder1.grid(row=0, column=0)
+holder2.grid(row=0, column=3)
+image.grid(row=1, column=1, columnspan= 3)
+back.grid(row=2, column=0)
+leave.grid(row=2, column=1)
+front.grid(row=2, column=2, pady=3)
+status.grid(row=3, column=2, sticky=E)
 
 root.mainloop()
