@@ -1,6 +1,5 @@
 from tkinter import *
 from PIL import ImageTk, Image
-import customtkinter as ctk
 import os
 
 root = Tk()
@@ -21,8 +20,6 @@ i = 0
 ImageFrame = Canvas(root, background= 'black', bd = 0)
 ButtonFrame = Frame(root)
 
-status = Label(ButtonFrame, text=f"image {i + 1} of {leng + 1}")
-status.pack()
 
 def screen():
     global image
@@ -73,18 +70,24 @@ open_img = ImageTk.PhotoImage(image_original)
 
 image = Label(ImageFrame, image=open_img)
 image.pack()
+
 leave = Button(text="Close", command=exit)
 leave.pack()
-if i == leng:
-    front = Button(ButtonFrame, text=">", state=DISABLED)
-else:
-    front = Button(text=">", command=frontF)
-front.pack()
+
 if i == 0:
     back = Button(ButtonFrame, text="<", state=DISABLED)
 else:
-    back = Button(text="<", command=backF)
+    back = Button(ButtonFrame, text="<", command=backF)
 back.pack()
+
+if i == leng:
+    front = Button(ButtonFrame, text=">", state=DISABLED)
+else:
+    front = Button(ButtonFrame, text=">", command=frontF)
+front.pack()
+
+status = Label(ButtonFrame, text=f"image {i + 1} of {leng + 1}")
+status.pack()
 
 ImageFrame.grid(row=0, column=1, columnspan=3, sticky= NSEW)
 ButtonFrame.grid(row=0, column=0, sticky= NSEW)
