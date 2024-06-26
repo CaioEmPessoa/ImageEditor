@@ -6,7 +6,7 @@ root = Tk()
 root.title("Image Editor")
 root.geometry('1080x720')
 
-root.columnconfigure((0,1,2,3), weight = 1, uniform = 'a')
+root.columnconfigure((0,1,2,3,4), weight = 1, uniform = 'a')
 root.rowconfigure(0, weight = 1)
 
 location = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
@@ -70,27 +70,28 @@ open_img = ImageTk.PhotoImage(image_original)
 
 
 image = Label(ImageFrame, image=open_img)
-image.pack()
+image.grid()
 
 leave = Button(text="Close", command=exit)
-
+leave.grid(row=1)
 
 if i == 0:
     back = Button(ButtonFrame, text="<", state=DISABLED)
 else:
     back = Button(ButtonFrame, text="<", command=backF)
-
+back.grid(row=1)
 
 if i == leng:
     front = Button(ButtonFrame, text=">", state=DISABLED)
 else:
     front = Button(ButtonFrame, text=">", command=frontF)
-
+front.grid(row=2)
 
 status = Label(ButtonFrame, text=f"image {i + 1} of {leng + 1}")
+status.grid(row=3)
 
 
-ImageFrame.grid(row=0, column=1, columnspan=3, sticky= NSEW)
-ButtonFrame.grid(row=0, column=0, sticky= NSEW)
+ImageFrame.grid(row=0, column=2, columnspan=3, sticky= NSEW)
+ButtonFrame.grid(row=0, column=0, columnspan=2, sticky= NSEW)
 
 root.mainloop()
