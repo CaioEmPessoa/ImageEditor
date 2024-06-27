@@ -25,14 +25,16 @@ ButtonFrame = Frame(root)
 def fill(img):
     global resized_tk
 
+    image_original = Image.open(img_list[i])
+
     ImageFrame_ratio = img.width / img.height
 
     if ImageFrame_ratio > image_ratio:
         width = int(img.width)
         height = int(width / image_ratio)
     else:
-        width = 1
-        height = 1
+        height = int(img.height)
+        width = int(height * image_ratio)
 
     resized_image = image_original.resize((width, height))
     resized_tk = ImageTk.PhotoImage(resized_image)
@@ -90,13 +92,15 @@ def screen():
 
 def frontF():
     global i
+    global image_original
     i += 1
-    screen()
-
+    fill(image_original)
+    
 def backF():
     global i
+    global image_original
     i -= 1
-    screen()
+    fill(image_original)
     
 image_original = Image.open(img_list[i])
 image_ratio = image_original.size[0] / image_original.size[1]
