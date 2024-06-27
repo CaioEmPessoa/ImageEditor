@@ -22,13 +22,30 @@ i = 0
 ImageFrame = Canvas(root, background= 'black', bd=0, highlightthickness=0, relief='ridge')
 ButtonFrame = Frame(root)
 
-def fill():
+def fill(img):
+    global resized_tk
+
+    ImageFrame_ratio = img.width / img.height
+
+    if ImageFrame_ratio > image_ratio:
+        width = int(img.width)
+        height = int(width / image_ratio)
+    else:
+        width = 1
+        height = 1
+
+    resized_image = image_original.resize((width, height))
+    resized_tk = ImageTk.PhotoImage(resized_image)
+    ImageFrame.create_image(int(img.width/2),
+                            int(img.height/2),
+                            anchor = 'center',
+                            image = resized_tk
+                                )
 
 def stretch_image(img):
     global resized_tk
     global i
     global img_list
-    global open_img
 
     image_original = Image.open(img_list[i])
 
@@ -45,7 +62,6 @@ def screen():
     global front
     global i
     global img_list
-    global open_img
     global leng
     global status
     global resized_tk
@@ -83,13 +99,15 @@ def backF():
     screen()
     
 image_original = Image.open(img_list[i])
-open_img = ImageTk.PhotoImage(image_original)
+image_ratio = image_original.size[0] / image_original.size[1]
+
+image_tk = ImageTk.PhotoImage(image_original)
 
 
 #image = Label(ImageFrame, image=open_img)
 #image.pack()
 #ImageFrame.create_image(0,0, image=open_img, anchor = 'nw')
-ImageFrame.bind('<Configure>', stretch_image)
+ImageFrame.bind('<Configure>', fill)
 
 if i == 0:
     back = ctk.CTkButton(ButtonFrame, text="<", state=DISABLED)
