@@ -38,21 +38,21 @@ def screen():
     open_img = ImageTk.PhotoImage(image_original)
     image = Label(ImageFrame, image=open_img)
     image.pack()
-    leave = Button(text="Close", command=exit)
-    leave.pack()
     if i == 0:
-        back = Button(ButtonFrame, text="<", state=DISABLED)
+        back = ctk.CTkButton(ButtonFrame, text="<", state=DISABLED)
     else:
-        back = Button(ButtonFrame, text="<", command=backF)
-    back.pack()
+        back = ctk.CTkButton(ButtonFrame, text="<", command=backF)
+    back.pack(pady=10)
     if i == leng:
-        front = Button(ButtonFrame, text=">", state=DISABLED)
+        front = ctk.CTkButton(ButtonFrame, text=">", state=DISABLED)
     else:
-        front = Button(ButtonFrame, text=">", command=frontF)
-    front.pack()
+        front = ctk.CTkButton(ButtonFrame, text=">", command=frontF)
+    front.pack(pady=10)
     status = Label(ButtonFrame, text=f"image {i + 1} of {leng + 1}")
-    status.pack()
-    ImageFrame.grid(row=0, column=1, columnspan=3, sticky= NSEW)
+    status.pack(pady=10)
+    leave = ctk.CTkButton(ButtonFrame, text="Close app", command=exit)
+    leave.pack(pady=250)
+    ImageFrame.grid(row=0, column=2, columnspan=3, sticky= NSEW)
     ButtonFrame.grid(row=0, column=0, sticky= NSEW)
 
 
@@ -71,27 +71,27 @@ open_img = ImageTk.PhotoImage(image_original)
 
 
 image = Label(ImageFrame, image=open_img)
-image.grid()
+image.pack()
 
 if i == 0:
     back = ctk.CTkButton(ButtonFrame, text="<", state=DISABLED)
 else:
     back = ctk.CTkButton(ButtonFrame, text="<", command=backF)
-back.pack()
+back.pack(pady=10)
 
 if i == leng:
     front = ctk.CTkButton(ButtonFrame, text=">", state=DISABLED)
 else:
     front = ctk.CTkButton(ButtonFrame, text=">", command=frontF)
-front.pack()
+front.pack(pady=10)
 
 status = Label(ButtonFrame, text=f"image {i + 1} of {leng + 1}")
-status.pack()
+status.pack(pady=10)
 
 leave = ctk.CTkButton(ButtonFrame, text="Close app", command=exit)
-leave.pack()
+leave.pack(pady=250)
 
 ImageFrame.grid(row=0, column=2, columnspan=3, sticky= NSEW)
-ButtonFrame.grid(row=0, column=0, columnspan=2, sticky= NSEW)
+ButtonFrame.grid(row=0, column=0, sticky= NSEW)
 
 root.mainloop()
