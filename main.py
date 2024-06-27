@@ -22,9 +22,16 @@ i = 0
 ImageFrame = Canvas(root, background= 'black', bd=0, highlightthickness=0, relief='ridge')
 ButtonFrame = Frame(root)
 
+def fill():
+
 def stretch_image(img):
     global resized_tk
-    
+    global i
+    global img_list
+    global open_img
+
+    image_original = Image.open(img_list[i])
+
     width = img.width
     height = img.height
     
@@ -34,7 +41,6 @@ def stretch_image(img):
     ImageFrame.create_image(0,0, image=resized_tk, anchor='nw')
 
 def screen():
-    global image
     global back
     global front
     global i
@@ -42,10 +48,12 @@ def screen():
     global open_img
     global leng
     global status
+    global resized_tk
+
 
     image_original = Image.open(img_list[i])
-    open_img = ImageTk.PhotoImage(image_original)
-    ImageFrame.create_image(0,0, image=open_img)
+    ImageFrame.bind('<Configure>', stretch_image)
+
     if i == 0:
         back = ctk.CTkButton(ButtonFrame, text="<", state=DISABLED)
     else:
