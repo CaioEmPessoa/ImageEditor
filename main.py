@@ -1,5 +1,6 @@
 from tkinter import *
 from PIL import ImageTk, Image
+import customtkinter as ctk
 import os
 
 root = Tk()
@@ -72,24 +73,23 @@ open_img = ImageTk.PhotoImage(image_original)
 image = Label(ImageFrame, image=open_img)
 image.grid()
 
-leave = Button(text="Close", command=exit)
-leave.grid(row=1)
-
 if i == 0:
-    back = Button(ButtonFrame, text="<", state=DISABLED)
+    back = ctk.CTkButton(ButtonFrame, text="<", state=DISABLED)
 else:
-    back = Button(ButtonFrame, text="<", command=backF)
-back.grid(row=1)
+    back = ctk.CTkButton(ButtonFrame, text="<", command=backF)
+back.pack()
 
 if i == leng:
-    front = Button(ButtonFrame, text=">", state=DISABLED)
+    front = ctk.CTkButton(ButtonFrame, text=">", state=DISABLED)
 else:
-    front = Button(ButtonFrame, text=">", command=frontF)
-front.grid(row=2)
+    front = ctk.CTkButton(ButtonFrame, text=">", command=frontF)
+front.pack()
 
 status = Label(ButtonFrame, text=f"image {i + 1} of {leng + 1}")
-status.grid(row=3)
+status.pack()
 
+leave = ctk.CTkButton(ButtonFrame, text="Close app", command=exit)
+leave.pack()
 
 ImageFrame.grid(row=0, column=2, columnspan=3, sticky= NSEW)
 ButtonFrame.grid(row=0, column=0, columnspan=2, sticky= NSEW)
