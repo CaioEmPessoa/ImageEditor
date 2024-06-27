@@ -23,10 +23,15 @@ ImageFrame = Canvas(root, background= 'black', bd=0, highlightthickness=0, relie
 ButtonFrame = Frame(root)
 
 def stretch_image(img):
+    global resized_tk
+    
     width = img.width
     height = img.height
-    print(width)
-    print(height)
+    
+    resized_img = image_original.resize((width, height))
+    resized_tk = ImageTk.PhotoImage(resized_img)
+
+    ImageFrame.create_image(0,0, image=resized_tk, anchor='nw')
 
 def screen():
     global image
