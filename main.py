@@ -19,9 +19,14 @@ img_list = [folder + img for img in os.listdir(folder)]
 leng = len(img_list) - 1
 i = 0
 
-ImageFrame = Canvas(root, background= 'black', bd = 0)
+ImageFrame = Canvas(root, background= 'black', bd=0, highlightthickness=0, relief='ridge')
 ButtonFrame = Frame(root)
 
+def stretch_image(img):
+    width = img.width
+    height = img.height
+    print(width)
+    print(height)
 
 def screen():
     global image
@@ -33,11 +38,9 @@ def screen():
     global leng
     global status
 
-    image.grid_forget()
     image_original = Image.open(img_list[i])
     open_img = ImageTk.PhotoImage(image_original)
-    image = Label(ImageFrame, image=open_img)
-    image.pack()
+    ImageFrame.create_image(0,0, image=open_img)
     if i == 0:
         back = ctk.CTkButton(ButtonFrame, text="<", state=DISABLED)
     else:
@@ -70,8 +73,10 @@ image_original = Image.open(img_list[i])
 open_img = ImageTk.PhotoImage(image_original)
 
 
-image = Label(ImageFrame, image=open_img)
-image.pack()
+#image = Label(ImageFrame, image=open_img)
+#image.pack()
+#ImageFrame.create_image(0,0, image=open_img, anchor = 'nw')
+ImageFrame.bind('<Configure>', stretch_image)
 
 if i == 0:
     back = ctk.CTkButton(ButtonFrame, text="<", state=DISABLED)
@@ -89,7 +94,7 @@ status = Label(ButtonFrame, text=f"image {i + 1} of {leng + 1}")
 status.pack(pady=10)
 
 leave = ctk.CTkButton(ButtonFrame, text="Close app", command=exit)
-leave.pack(pady=250)
+leave.pack(pady=200)
 
 ImageFrame.grid(row=0, column=2, columnspan=3, sticky= NSEW)
 ButtonFrame.grid(row=0, column=0, sticky= NSEW)
