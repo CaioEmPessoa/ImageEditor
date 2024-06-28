@@ -44,21 +44,6 @@ def fill(img):
                             image = resized_tk
                                 )
 
-def stretch_image(img):
-    global resized_tk
-    global i
-    global img_list
-
-    image_original = Image.open(img_list[i])
-
-    width = img.width
-    height = img.height
-    
-    resized_img = image_original.resize((width, height))
-    resized_tk = ImageTk.PhotoImage(resized_img)
-
-    ImageFrame.create_image(0,0, image=resized_tk, anchor='nw')
-
 def frontF():
     global i
     global image_original
