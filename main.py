@@ -59,37 +59,6 @@ def stretch_image(img):
 
     ImageFrame.create_image(0,0, image=resized_tk, anchor='nw')
 
-def screen():
-    global back
-    global front
-    global i
-    global img_list
-    global leng
-    global status
-    global resized_tk
-
-
-    image_original = Image.open(img_list[i])
-    ImageFrame.bind('<Configure>', stretch_image)
-
-    if i == 0:
-        back = ctk.CTkButton(ButtonFrame, text="<", state=DISABLED)
-    else:
-        back = ctk.CTkButton(ButtonFrame, text="<", command=backF)
-    back.pack(pady=10)
-    if i == leng:
-        front = ctk.CTkButton(ButtonFrame, text=">", state=DISABLED)
-    else:
-        front = ctk.CTkButton(ButtonFrame, text=">", command=frontF)
-    front.pack(pady=10)
-    status = Label(ButtonFrame, text=f"image {i + 1} of {leng + 1}")
-    status.pack(pady=10)
-    leave = ctk.CTkButton(ButtonFrame, text="Close app", command=exit)
-    leave.pack(pady=250)
-    ImageFrame.grid(row=0, column=2, columnspan=3, sticky= NSEW)
-    ButtonFrame.grid(row=0, column=0, sticky= NSEW)
-
-
 def frontF():
     global i
     global image_original
