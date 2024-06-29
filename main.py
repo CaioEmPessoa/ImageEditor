@@ -29,6 +29,9 @@ def fill(img):
 
     ImageFrame_ratio = img.width / img.height
 
+    ImageFrame.grid_forget()
+    ButtonFrame.grid_forget()
+
     if ImageFrame_ratio > image_ratio:
         width = int(img.width)
         height = int(width / image_ratio)
@@ -38,6 +41,10 @@ def fill(img):
 
     resized_image = image_original.resize((width, height))
     resized_tk = ImageTk.PhotoImage(resized_image)
+
+    ImageFrame.grid(row=0, column=2, columnspan=3, sticky= NSEW)
+    ButtonFrame.grid(row=0, column=0, sticky= NSEW)
+
     ImageFrame.create_image(int(img.width/2),
                             int(img.height/2),
                             anchor = 'center',
