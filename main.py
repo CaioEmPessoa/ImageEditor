@@ -76,6 +76,9 @@ image_tk = ImageTk.PhotoImage(image_original)
 
 ImageFrame.bind('<Configure>', lambda event: img_update())
 
+holder = ctk.CTkLabel(ButtonFrame, text=" ")
+holder.pack(pady=40)
+
 if i == 0:
     back = ctk.CTkButton(ButtonFrame, text="<", state=DISABLED)
 else:
@@ -86,6 +89,7 @@ if i == leng:
     front = ctk.CTkButton(ButtonFrame, text=">", state=DISABLED)
 else:
     front = ctk.CTkButton(ButtonFrame, text=">", command=frontF)
+
 front.pack(pady=10)
 
 status = Label(ButtonFrame, text=f"image {i + 1} of {leng + 1}")
