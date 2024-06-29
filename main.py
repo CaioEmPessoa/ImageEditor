@@ -46,43 +46,28 @@ def img_update():
 
     status.config(text=f"Image {i + 1} of {leng + 1}")
 
-def fill(img):
-    global resized_tk
-
-    image_original = Image.open(img_list[i])
-
-    ImageFrame_ratio = img.width / img.height
-
-    ImageFrame.delete("all")
-
-    if ImageFrame_ratio > image_ratio:
-        width = int(img.width)
-        height = int(width / image_ratio)
+def buttons_update():
+    if i == 0:
+        back.configure(state=DISABLED)
     else:
-        height = int(img.height)
-        width = int(height * image_ratio)
+        back.configure(state=NORMAL)
 
-    resized_image = image_original.resize((width, height))
-    resized_tk = ImageTk.PhotoImage(resized_image)
-
-    ImageFrame.grid(row=0, column=2, columnspan=3, sticky= NSEW)
-    ButtonFrame.grid(row=0, column=0, sticky= NSEW)
-
-    ImageFrame.create_image(int(img.width/2),
-                            int(img.height/2),
-                            anchor = 'center',
-                            image = resized_tk
-                                )
+    if i == leng:
+        front.configure(state=DISABLED)
+    else:
+        front.configure(state=NORMAL)
 
 def frontF():
     global i
-    global image_original
     i += 1
+    buttons_update()
+    img_update()
     
 def backF():
     global i
-    global image_original
     i -= 1
+    buttons_update()
+    img_update()
     
 image_original = Image.open(img_list[i])
 image_ratio = image_original.size[0] / image_original.size[1]
