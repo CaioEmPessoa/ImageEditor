@@ -48,14 +48,14 @@ def img_update():
 
 def buttons_update():
     if i == 0:
-        back.configure(state=DISABLED)
+        back.configure(state=DISABLED, fg_color='red')
     else:
-        back.configure(state=NORMAL)
+        back.configure(state=NORMAL, fg_color='blue')
 
     if i == leng:
-        front.configure(state=DISABLED)
+        front.configure(state=DISABLED, fg_color='red')
     else:
-        front.configure(state=NORMAL)
+        front.configure(state=NORMAL, fg_color='blue')
 
 def frontF():
     global i
