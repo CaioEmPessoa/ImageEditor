@@ -1,9 +1,8 @@
-from tkinter import *
 from PIL import ImageTk, Image
 import customtkinter as ctk
 import os
 
-class fullView(Tk):
+class fullView(ctk.CTk):
     def __init__(self):
         super().__init__()
 
@@ -52,14 +51,14 @@ class fullView(Tk):
 
     def buttons_update(self):
         if self.img_index == 0:
-            self.back.configure(state=DISABLED, fg_color='red')
+            self.back.configure(state="disabled")
         else:
-            self.back.configure(state=NORMAL, fg_color='blue')
+            self.back.configure(state="normal")
 
         if self.img_index == self.img_lenght:
-            self.front.configure(state=DISABLED, fg_color='red')
+            self.front.configure(state="disabled")
         else:
-            self.front.configure(state=NORMAL, fg_color='blue')
+            self.front.configure(state="normal")
 
     def frontF(self):
         self.img_index += 1
@@ -73,8 +72,8 @@ class fullView(Tk):
         
     def viewElements(self):
         ## TODO: CHANGE GRID
-        self.ImageFrame = Canvas(self, background= 'black', bd=0, highlightthickness=0, relief='ridge')
-        self.ButtonFrame = Frame(self)
+        self.ImageFrame = ctk.CTkCanvas(self, background= 'black', bd=0, highlightthickness=0, relief='ridge')
+        self.ButtonFrame = ctk.CTkFrame(self)
 
         image_original = Image.open(self.img_list[self.img_index])
         image_ratio = image_original.size[0] / image_original.size[1] # not used
@@ -94,11 +93,11 @@ class fullView(Tk):
 
         self.buttons_update() 
 
-        self.status = Label(self.ButtonFrame, text=f"image {self.img_index + 1} of {self.img_lenght + 1}")
+        self.status = ctk.CTkLabel(self.ButtonFrame, text=f"image {self.img_index + 1} of {self.img_lenght + 1}")
         self.status.pack(pady=10)
 
         leave = ctk.CTkButton(self.ButtonFrame, text="Close app", command=exit)
         leave.pack(pady=200)
 
-        self.ImageFrame.grid(row=0, column=2, columnspan=3, sticky= NSEW)
-        self.ButtonFrame.grid(row=0, column=0, sticky= NSEW)
+        self.ImageFrame.grid(row=0, column=2, columnspan=3, sticky= "NSEW")
+        self.ButtonFrame.grid(row=0, column=0, sticky= "NSEW")
